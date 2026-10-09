@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Red Chair Productions — Film, Commercials & Branded Content</title>
+  <meta name="description" content="Red Chair Productions is a creative production house in Dhaka, Bangladesh, turning ideas into films, commercials and branded content.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="Red Chair Productions">
+  <meta property="og:description" content="We turn ideas into stories worth watching.">
+  <meta property="og:image" content="assets/media/showreel-v2.jpg">
+  <link rel="icon" type="image/png" href="assets/brand/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/media/showreel-v2.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- Intro: red C draws, then the frame opens -->
+  <div class="loader" aria-hidden="true">
+    <svg class="loader__c" viewBox="0 0 100 100"><path d="M0 0H100V44H80V20H20V80H100V100H0Z"/></svg>
+    <span class="loader__tc mono">00:00:00:00</span>
+  </div>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="cursor-label mono" aria-hidden="true"><span>Play</span></div>
+
+  <!-- NAV -->
+  <header class="nav" data-nav>
+    <a href="#top" class="nav__logo" aria-label="Red Chair Productions — home">
+      <img src="assets/brand/logo-white.png" alt="Red Chair Productions" width="900" height="240">
+    </a>
+    <nav class="nav__links mono" aria-label="Primary">
+      <a href="#work" data-hover>Work</a>
+      <a href="#services" data-hover>Services</a>
+      <a href="#about" data-hover>About</a>
+      <a href="#contact" data-hover>Contact</a>
+    </nav>
+    <button class="nav__toggle mono" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+      <span class="nav__toggle-label">Menu</span><span class="nav__toggle-bars"><i></i><i></i></span>
+    </button>
+  </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="Mobile">
+      <a href="#work"><span class="mono">01</span>Work</a>
+      <a href="#services"><span class="mono">02</span>Services</a>
+      <a href="#about"><span class="mono">03</span>About</a>
+      <a href="#contact"><span class="mono">04</span>Contact</a>
+    </nav>
+    <div class="menu__foot mono">
+      <a href="mailto:info@redchairproductions.com" data-email>info@redchairproductions.com</a>
+      <span>Dhaka, Bangladesh</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- 1. HERO -->
+    <section class="hero" data-hero>
+      <div class="hero__media">
+        <video class="hero__video" muted loop playsinline preload="auto" data-hero-video></video>
+        <div class="hero__shade"></div>
+      </div>
+      <div class="hero__frame mono" aria-hidden="true">
+        <span class="hero__rec"><i></i>REC</span>
+        <span data-timecode>00:00:00:00</span>
+        <span class="hero__ratio">16:9 — 4K</span>
+      </div>
+      <div class="hero__content wrap">
+        <h1 class="display hero__title" data-split>
+          <span class="line">We turn ideas</span>
+          <span class="line">into stories <span class="red">worth</span></span>
+          <span class="line">watching.</span>
+        </h1>
+        <div class="hero__bottom">
+          <p class="hero__sub mono" data-fade>Film. Commercials. Branded Content. Post Production.</p>
+          <div class="hero__ctas" data-fade>
+            <a href="#work" class="btn btn--red" data-magnetic data-hover><span>View our work</span><i class="btn__arrow">↓</i></a>
+            <a href="#contact" class="btn btn--ghost" data-magnetic data-hover><span>Start a project</span><i class="btn__arrow">→</i></a>
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll mono" aria-label="Scroll down"><span>Scroll</span><i></i></a>
+    </section>
+
+    <!-- 2. INTRO -->
+    <section class="intro wrap" id="about">
+      <p class="eyebrow mono"><span>01</span> / About</p>
+      <h2 class="display intro__title" data-split>
+        <span class="line">We create stories</span>
+        <span class="line">that <span class="red">move</span> people.</span>
+      </h2>
+      <div class="intro__grid">
+        <svg class="c-mark" viewBox="0 0 100 100" aria-hidden="true" data-cmark><path d="M0 0H100V44H80V20H20V80H100V100H0Z"/></svg>
+        <p class="intro__body" data-fade>Red Chair Productions is a creative production house focused on turning ideas into visually compelling films, commercials and branded content.</p>
+      </div>
+    </section>
+
+    <!-- 3. WHAT WE CREATE -->
+    <section class="create" data-create>
+      <div class="create__pin">
+        <div class="create__head wrap">
+          <p class="eyebrow mono"><span>02</span> / What we create</p>
+          <div class="create__progress"><i data-create-bar></i></div>
+        </div>
+        <div class="create__track" data-create-track></div>
+      </div>
+    </section>
+
+    <!-- 4. FEATURED WORK -->
+    <section class="work wrap" id="work">
+      <div class="work__head">
+        <p class="eyebrow mono"><span>03</span> / Selected projects</p>
+        <h2 class="display work__title" data-split><span class="line">Featured work</span></h2>
+      </div>
+      <div class="filters mono" role="tablist" aria-label="Filter projects" data-filters></div>
+      <div class="work__grid" data-work></div>
+      <p class="work__empty mono" data-empty hidden>New work in this category is coming soon.</p>
+    </section>
+
+    <!-- 5. SHOWREEL -->
+    <section class="reel" data-reel>
+      <div class="reel__head wrap">
+        <p class="eyebrow mono"><span>04</span> / Showreel</p>
+        <h2 class="display reel__title" data-split><span class="line">Our reel</span></h2>
+        <p class="reel__line" data-fade>A glimpse into the stories we've brought to life.</p>
+      </div>
+      <div class="reel__stage">
+        <button class="reel__frame" data-reel-frame data-cursor="Play reel" aria-label="Play showreel fullscreen">
+          <video class="reel__video" muted loop playsinline preload="none" data-reel-video></video>
+          <span class="reel__play mono"><i>▶</i><span>Play reel</span></span>
+          <span class="reel__meta mono"><span>RCP — Showreel</span><span data-reel-runtime></span></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 6. SERVICES -->
+    <section class="services wrap" id="services">
+      <div class="services__head">
+        <p class="eyebrow mono"><span>05</span> / Services</p>
+        <h2 class="display services__title" data-split>
+          <span class="line">Everything a story</span>
+          <span class="line">needs to be <span class="red">seen.</span></span>
+        </h2>
+      </div>
+      <ul class="services__list" data-services></ul>
+    </section>
+
+    <!-- 7. PROCESS -->
+    <section class="process wrap" data-process>
+      <p class="eyebrow mono"><span>06</span> / Process</p>
+      <h2 class="display process__title" data-split>
+        <span class="line">From idea to</span>
+        <span class="line">final frame.</span>
+      </h2>
+      <ol class="process__steps" data-steps>
+        <span class="process__line" aria-hidden="true"><i data-process-line></i></span>
+      </ol>
+    </section>
+
+    <!-- 8. BRAND STATEMENT -->
+    <section class="statement" data-statement>
+      <div class="statement__inner">
+        <p class="statement__row display" data-row="1">Stories first. Stories first. Stories first.</p>
+        <p class="statement__row statement__row--b display" data-row="2">Everything else follows. Everything else follows.</p>
+      </div>
+      <svg class="statement__c" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 0H100V44H80V20H20V80H100V100H0Z"/></svg>
+    </section>
+
+    <!-- 9. CLIENTS -->
+    <section class="clients wrap">
+      <div class="clients__head">
+        <p class="eyebrow mono"><span>07</span> / Trust</p>
+        <h2 class="clients__title mono" data-fade>Selected clients &amp; partners</h2>
+      </div>
+      <ul class="clients__wall" data-clients></ul>
+    </section>
+
+    <!-- 10. CTA -->
+    <section class="cta" id="contact">
+      <div class="cta__media" aria-hidden="true"><div class="cta__glow"></div></div>
+      <div class="wrap cta__inner">
+        <p class="eyebrow mono"><span>08</span> / Contact</p>
+        <h2 class="display cta__title" data-split>
+          <span class="line">Have a story</span>
+          <span class="line">in mind?</span>
+        </h2>
+        <p class="cta__sub mono" data-fade>Let's turn it into something people remember.</p>
+        <a class="cta__btn" href="mailto:info@redchairproductions.com?subject=New%20project%20enquiry" data-email-subject data-magnetic data-hover data-cursor="Say hello">
+          <span class="cta__btn-fill"></span>
+          <span class="cta__btn-text mono">Start a project</span>
+          <span class="cta__btn-arrow">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 11. FOOTER -->
+  <footer class="footer wrap">
+    <div class="footer__top">
+      <a href="#top" class="footer__logo" aria-label="Back to top"><img src="assets/brand/logo-white.png" alt="Red Chair Productions" width="900" height="240" loading="lazy"></a>
+      <div class="footer__cols mono">
+        <div>
+          <h3>Contact</h3>
+          <p>Dhaka, Bangladesh</p>
+          <a href="mailto:info@redchairproductions.com" data-email data-hover>info@redchairproductions.com</a>
+        </div>
+        <div>
+          <h3>Follow</h3>
+          <ul data-social></ul>
+        </div>
+        <div>
+          <h3>Navigate</h3>
+          <ul>
+            <li><a href="#work" data-hover>Work</a></li>
+            <li><a href="#services" data-hover>Services</a></li>
+            <li><a href="#about" data-hover>About</a></li>
+            <li><a href="#contact" data-hover>Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#" data-hover>Support</a></li>
+            <li><a href="#" data-hover>Privacy Policy</a></li>
+            <li><a href="#" data-hover>Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__word display" aria-hidden="true">Red Chair</div>
+    <div class="footer__bottom mono">
+      <span>© <span data-year>2026</span> Red Chair Productions. All Rights Reserved.</span>
+      <span>Frame. Cut. Direct.</span>
+    </div>
+  </footer>
+
+  <!-- Fullscreen player -->
+  <div class="player" data-player aria-hidden="true" role="dialog" aria-label="Video player">
+    <button class="player__close mono" data-player-close data-hover>Close ✕</button>
+    <video class="player__video" controls playsinline data-player-video></video>
+    <p class="player__title mono" data-player-title></p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
