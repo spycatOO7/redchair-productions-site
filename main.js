@@ -117,6 +117,7 @@
     if (activeCard) stopCard(activeCard);
     heroVideo.pause();
     reelVideo.pause();
+    ctaVideo.pause();
     pv.poster = poster || '';
     pv.src = src;
     pv.muted = false;
@@ -151,22 +152,31 @@
   reelVideo.dataset.src = D.reel.video;
   $('[data-reel-frame]').addEventListener('click', () => openPlayer(D.reel.video, 'Red Chair Productions — Showreel', D.reel.poster));
 
+  /* ------------------------------------------------------------ CTA film */
+  const ctaVideo = $('[data-cta-video]');
+  ctaVideo.poster = D.cta.poster;
+  ctaVideo.dataset.src = D.cta.video;
+  const ctaBtn = $('.cta__btn');
+  ctaBtn.addEventListener('mouseenter', () => $('.cta').classList.add('is-hot'));
+  ctaBtn.addEventListener('mouseleave', () => $('.cta').classList.remove('is-hot'));
+
   // Background videos pause when off-screen, so hero and reel never play together.
   const inView = new Map();
   const resumeBackgroundVideo = () => {
     if (player.classList.contains('is-open')) return;
     inView.get(heroVideo) ? heroVideo.play().catch(() => {}) : heroVideo.pause();
     if (inView.get(reelVideo)) { loadVideo(reelVideo); reelVideo.play().catch(() => {}); } else reelVideo.pause();
+    if (inView.get(ctaVideo)) { loadVideo(ctaVideo); ctaVideo.play().catch(() => {}); } else ctaVideo.pause();
   };
   const bgIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => inView.set(e.target, e.isIntersecting));
     resumeBackgroundVideo();
   }, { threshold: .15 });
-  bgIO.observe(heroVideo); bgIO.observe(reelVideo);
+  bgIO.observe(heroVideo); bgIO.observe(reelVideo); bgIO.observe(ctaVideo);
   heroVideo.addEventListener('playing', () => { cancelAnimationFrame(tcRaf); tickTC(); });
   heroVideo.addEventListener('pause', () => cancelAnimationFrame(tcRaf));
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { heroVideo.pause(); reelVideo.pause(); } else resumeBackgroundVideo();
+    if (document.hidden) { heroVideo.pause(); reelVideo.pause(); ctaVideo.pause(); } else resumeBackgroundVideo();
   });
 
   /* ----------------------------------------------------------------- services */
@@ -230,6 +240,22 @@
     applyFilter(b.dataset.filter);
   }));
 
+  /* ------------------------------------------------------ scroll-lit words */
+  const splitWords = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((t) => {
+          if (!t) return;
+          if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+          const w = document.createElement('span'); w.className = 'w'; w.textContent = t; frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) splitWords(n);
+    });
+  };
+  $$('[data-lit]').forEach(splitWords);
+
   /* ----------------------------------------------------------- split headings */
   $$('[data-split] .line').forEach((l) => { l.innerHTML = `<span class="inner">${l.innerHTML}</span>`; });
 
@@ -249,6 +275,7 @@
   const finishLoad = () => { document.body.classList.remove('is-loading'); };
   if (!gsapOK || reduced) {
     $('.loader').remove();
+    $$('.lit .w').forEach((w) => w.classList.add('on'));
     finishLoad();
     window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
     resumeBackgroundVideo();
@@ -300,6 +327,20 @@
   });
   $$('.eyebrow').forEach((el) => gsap.from(el, { opacity: 0, x: -16, duration: .9, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } }));
 
+  // Words light up one by one as the reader scrolls through them
+  $$('[data-lit]').forEach((el) => {
+    const words = $$('.w', el);
+    ScrollTrigger.create({
+      trigger: el, start: 'top 82%', end: () => (el.matches('p') ? 'bottom 60%' : 'bottom 50%'), scrub: true,
+      onUpdate: (st) => { const n = Math.round(st.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); },
+    });
+  });
+
+  // Big section titles drift sideways with the scroll, like the formats reel
+  $$('.work__title, .reel__title, .cta__title').forEach((t) => {
+    gsap.fromTo(t, { xPercent: 6 }, { xPercent: -3, ease: 'none', scrollTrigger: { trigger: t, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
   // Red C draws in by mask
   gsap.fromTo('[data-cmark]', { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: '[data-cmark]', start: 'top 85%' } });
 
@@ -346,6 +387,11 @@
     gsap.fromTo('[data-reel-frame]', { clipPath: 'inset(6% 4% 6% 4%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '.reel__stage', start: 'top 90%', end: 'top 25%', scrub: true } });
   });
 
+  // Services — the row at reading height lights up
+  mm.add('(min-width: 761px) and (hover: hover)', () => {
+    $$('.svc').forEach((row) => ScrollTrigger.create({ trigger: row, start: 'top 58%', end: 'bottom 58%', toggleClass: 'is-active' }));
+  });
+
   // Services rows
   gsap.from('.svc', { opacity: 0, y: 24, duration: .9, ease: 'expo.out', stagger: .04, scrollTrigger: { trigger: '.services__list', start: 'top 85%' } });
 
@@ -372,6 +418,10 @@
 
   // Clients
   gsap.from('.client', { opacity: 0, duration: 1, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: '[data-clients]', start: 'top 85%' } });
+
+  // CTA — the film frame opens to full bleed behind the question
+  gsap.fromTo('.cta__media', { clipPath: 'inset(18% 22% 18% 22%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top 85%', end: 'top 10%', scrub: true } });
+  gsap.fromTo('.cta__video', { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   // CTA glow breathes up as it enters
   gsap.fromTo('.cta__glow', { yPercent: 30, opacity: .2 }, { yPercent: -5, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom bottom', scrub: true } });

@@ -36,6 +36,12 @@ window.RC = {
     runtime: '00:00:19:20',
   },
 
+  // Background film behind "Have a story in mind?"
+  cta: {
+    video: 'assets/media/cinema-rig-cinematic-loop.mp4',
+    poster: 'assets/media/cinema-rig-cinematic.webp',
+  },
+
   // Formats listed in "What we create"
   formats: [
     'Film & Video Production', 'TVC', 'OVC', 'Commercials', 'Branded Content',
